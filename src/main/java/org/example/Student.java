@@ -7,8 +7,14 @@ import java.sql.SQLException;
 
 public class Student {
 
+    String id;
+    String name;
+    int age;
+    string department;
+
+
     public String addStudent(String id, String name, int age, String department, Connection conn) {
-        String sql = "INSERT INTO employees (employee_id,name,age,department )VALUES (?,?,?,?)";
+        String sql = "INSERT INTO student (id,name,age,department )VALUES (?,?,?,?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql);) {
 
             preparedStatement.setString(1, id);
@@ -50,6 +56,55 @@ public class Student {
             return "Retrieving employee is unsuccessful! Reason: "+ e.getSQLState();
         }
     }
+
+    public String updateStudent(String id, String attribute, Object value,Connection conn){
+        String sql = "UPDATE employees SET " + attribute + " = ? WHERE employee_id = ?";
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql);) {
+
+            if(!attribute.equals("age")) {
+                preparedStatement.setString(1, value.toString());
+            }else{
+                preparedStatement.setInt(1,Integer.parseInt(value.toString()));
+            }
+            preparedStatement.setString(2,id);
+
+            int res = preparedStatement.executeUpdate(); // can use  preparedStatement.executeUpdate();
+            if (res>0) {
+                return "Successfully updated the record of the employee Id: " + id;
+            } else {
+                return "Updating employee is unsuccessful!";
+            }
+        }
+        catch (SQLException e){
+            return "Updating employee is unsuccessful! Reason: "+ e.getMessage();
+        }
+    }
+
+    public String deleteStudent(String id, Connection conn){
+        String sql = "DELETE FROM employees WHERE employee_id = ?";
+        try(PreparedStatement preparedStatement = conn.prepareStatement(sql);) {
+
+            preparedStatement.setString(1,id);
+
+            int row = preparedStatement.executeUpdate();
+            if (row > 0) {
+                return "Successfully deleted the record of the employee Id: " + id;
+            }
+            else if (row == 0) {
+                return "Given employee is not found!";
+            }
+            else{
+                return "Deleting employee is unsuccessful!";
+            }
+        }
+        catch (SQLException e){
+            return "Deleting employee is unsuccessful! Reason: "+ e.getMessage();
+        }
+    }
+
+
+
+
 
 
 }

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world");
+
 
         try (Connection connection = dbConnect.getConnection()) {
             if (connection != null) {
@@ -17,4 +17,5 @@ public class Main {
             System.out.println("Error connecting to the database: " + e.getMessage());
         }
     }
+
 }
