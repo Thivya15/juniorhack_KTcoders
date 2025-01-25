@@ -10,7 +10,7 @@ public class Student {
     String id;
     String name;
     int age;
-    string department;
+    String department;
 
 
     public String addStudent(String id, String name, int age, String department, Connection conn) {
