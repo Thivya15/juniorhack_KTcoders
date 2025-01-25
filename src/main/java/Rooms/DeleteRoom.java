@@ -13,7 +13,7 @@ public class DeleteRoom(String id, Connection conn) {
 
             int row = preparedStatement.executeUpdate();
             if (row > 0) {
-                return "Successfully deleted the record of the employee Id: " + id;
+                return "Successfully deleted the record of the room Id: " + roomId;
             }
             else if (row == 0) {
                 return "Given employee is not found!";

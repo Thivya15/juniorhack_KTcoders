@@ -14,7 +14,7 @@ public ViewRooms {
         String sql = "SELECT * FROM hmsystem WHERE roomId = ?;";
         StringBuilder result = new StringBuilder();
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setString(1, id);
+            preparedStatement.setString(1, roomId);
             ResultSet res = preparedStatement.executeQuery();
 
             if (res.next()) {

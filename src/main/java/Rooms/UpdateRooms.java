@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 public class UpdateRooms(String id, String attribute, Object value, Connection conn) {
 
     private String attribute;
-    String sql = "UPDATE employees SET " + attribute + " = ? WHERE employee_id = ?";
+    String sql = "UPDATE employees SET " + attribute + " = ? WHERE roomId = ?";
         try(
     PreparedStatement preparedStatement = conn.prepareStatement(sql);) {
 
