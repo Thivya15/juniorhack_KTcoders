@@ -4,39 +4,72 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class AddRooms(String roomId, int roomNo, int capacity, int availableRoom, Connection conn) {
+public class AddRooms {
 
-        String sql = "INSERT INTO employees (roomId,roomNo,capacity,availableRoom )VALUES (?,?,?,?)";
-        try(
-    private Connection conn;
-    PreparedStatement preparedStatement = conn.prepareStatement(sql);) {
+    String roomId;
+    int roomNo;
+    int capacity;
+    int availableRoom;
 
-        String roomId = null;
-        int roomNo=null;
-        int capacity = null;
-        int availableRoom = null;
-        preparedStatement.setString(1,roomId);
-            preparedStatement.setInt(2,roomNo);
-            preparedStatement.setInt(3,capacity);
-            preparedStatement.setInt(4,availableRoom);
+    public AddRooms(String roomId, int roomNo, int capacity, int availableRoom) throws SQLException {
+        this.roomId = roomId;
+        this.roomNo = roomNo;
+        this.capacity = capacity;
+        this.availableRoom = availableRoom;
+    }
+
+
+    public String getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(String roomId) {
+        this.roomId = roomId;
+    }
+
+    public int getRoomNo() {
+        return roomNo;
+    }
+
+    public void setRoomNo(int roomNo) {
+        this.roomNo = roomNo;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    public int getAvailableRoom() {
+        return availableRoom;
+    }
+
+    public void setAvailableRoom(int availableRoom) {
+        this.availableRoom = availableRoom;
+    }
+
+    public String addHostel(String id, int capacity, int noOfRoom,int available) {
+        String sql = "INSERT INTO hostel (hosId,name,hosNoOfRoom )VALUES (?,?,?)";
+        Connection conn;
+        try (PreparedStatement preparedStatement = conn.prepareStatement(sql);) {
+
+            preparedStatement.setString(1, id);
+            preparedStatement.setInt(2, capacity);
+            preparedStatement.setInt(3, noOfRoom);
+            preparedStatement.setInt(3, available);
 
             int res = preparedStatement.executeUpdate(); // can use  preparedStatement.executeUpdate();
 
-            if (res>0) {
-                String id;
-                return "Successfully added the record of the room Id: " + id;
+            if (res > 0) {
+                return "Successfully added the record of the Hostel Id: " + id;
             } else {
-                return "Registering room is unsuccessful!";
+                return "Registering hostel is unsuccessful!";
             }
+        } catch (SQLException e) {
+            return "Registering hostel is unsuccessful! Reason: " + e.getMessage();
         }
-        catch (SQLException e){
-            return "Registering room is unsuccessful! Reason: "+ e.getMessage();
-        }
-
-    public AddRooms() throws SQLException {
     }
-}
-
-
-
-}
+        }
